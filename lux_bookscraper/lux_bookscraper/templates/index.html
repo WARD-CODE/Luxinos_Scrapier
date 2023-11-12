@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrapy Data Display</title>
+    <style>
+        /* Add some basic styles for the grid */
+        ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        li {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>500 Flats and Houses "Sreality.CZ SCRAPY TEST (EL WARDI)"</h1>
+    <ul>
+        {% for item in data %}
+            <li>
+                <img src="{{ item[1] }}" alt="{{ item[0] }} Image" style="max-width: 100%;">
+                <p>{{ item[0] }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -21,13 +21,15 @@ class LuxBookscraperPipeline:
         )
 
     def open_spider(self, spider):
+
         self.conn = psycopg2.connect(
-            database=self.postgres_db,
-            user=self.postgres_user,
-            password=self.postgres_password,
-            host=self.postgres_host,
-            port=self.postgres_port
+            host="postgres",
+            user="postgres",
+            password="xvlkAO1987hgj",
+            dbname="postgres",
+            port="5432",
         )
+        
         self.cursor = self.conn.cursor()
 
     def delete_previous_data(self):
@@ -47,7 +49,7 @@ class LuxBookscraperPipeline:
         
         # Adjust the SQL query and item fields based on your specific requirements
         query = """
-            INSERT INTO flats (id, name, image_url)
+            INSERT INTO public.flats (id, name, image_url)
             VALUES (%s, %s, %s)
         """
         values = (self.i, item['name'], item['img_url'])
@@ -67,7 +69,7 @@ class LuxBookscraperPipeline:
         self.open_spider(None)
     # Adjust the SQL query and item fields based on your specific requirements
         query = """
-            SELECT name, image_url from flats ORDER BY id DESC LIMIT 500
+            SELECT name, image_url from public.flats ORDER BY id DESC LIMIT 500
         """
         self.cursor = self.conn.cursor()
         self.cursor.execute(query)

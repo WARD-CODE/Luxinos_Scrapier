@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./lux_bookscraper
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=xvlkAO1987hgj
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+    command: ["python", "app.py"]
+
+  scrapy:
+    build:
+      context: ./lux_bookscraper
+    volumes:
+      - ./lux_bookscraper:/app
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=xvlkAO1987hgj
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+    command: ["scrapy", "crawl", "lux_bookspider"]
+
+  postgres:
+    image: "postgres:latest"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=xvlkAO1987hgj
+      - POSTGRES_HOST=localhost
+    ports:
+      - "5432:5432"
+
+networks:
+  mynetwork:

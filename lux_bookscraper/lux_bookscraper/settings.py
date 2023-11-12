@@ -66,7 +66,7 @@ ROBOTSTXT_OBEY = False
 POSTGRES_DB = 'postgres'
 POSTGRES_USER = 'postgres'
 POSTGRES_PASSWORD = 'xvlkAO1987hgj'
-POSTGRES_HOST = 'localhost'
+POSTGRES_HOST = 'postgres'
 POSTGRES_PORT = '5432'
 
 ITEM_PIPELINES = {
